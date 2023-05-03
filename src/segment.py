@@ -24,4 +24,4 @@ class Segment:
         return self.date.weekday() == self.SUNDAY_NUMBER
 
     def is_overnight(self) -> bool:
-        return self.date.hour >= self.OVERNIGHT_START or self.date.hour <= self.OVERNIGHT_START
+        return self.date.hour >= self.OVERNIGHT_START or self.date.hour <= self.OVERNIGHT_END
