@@ -1,6 +1,9 @@
 from datetime import datetime
 
 
+def is_sunday(date):
+    return date.weekday() == 6
+
 def calculate_ride(segments):
     fare = 0
     for segment in segments:
@@ -8,15 +11,12 @@ def calculate_ride(segments):
             if segment.get("date") is not None and isinstance(segment.get("date"), datetime) :
                 overnight = segment.get("date").hour >= 22 or segment.get("date").hour <= 6
                 if overnight:
-                    # not sunday
-                    if segment.get("date").weekday() != 6:
-                        fare += segment.get("distance") * 3.90
-                    # sunday
-                    else:
+                    if is_sunday(segment.get("date")):
                         fare += segment.get("distance") * 5
+                    else:
+                        fare += segment.get("distance") * 3.90                        
                 else:
-                    # sunday
-                    if segment.get("date").weekday() == 6:
+                    if is_sunday(segment.get("date")):
                         fare += segment.get("distance") * 2.9
                     else:
                         fare += segment.get("distance") * 2.10
