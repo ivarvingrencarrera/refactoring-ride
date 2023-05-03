@@ -21,8 +21,8 @@ def is_valid_date(date):
 def calculate_ride(segments):
     fare = 0
     for segment in segments:
-        if not is_valid_distance(segment.get("distance")): return -1
-        if not is_valid_date(segment.get("date")): return -2
+        if not is_valid_distance(segment.get("distance")): raise ValueError('Invalid distance')
+        if not is_valid_date(segment.get("date")): raise ValueError('Invalid date')
         if is_overnight(segment.get("date")) and is_sunday(segment.get("date")):
             fare += segment.get("distance") * SUNDAY_OVERNIGHT_FARE
         elif is_overnight(segment.get("date")) and not is_sunday(segment.get("date")):
