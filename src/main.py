@@ -1,7 +1,7 @@
 from datetime import datetime
 
 
-def calc(movArray):
+def calculate_ride(movArray):
     result = 0
     for mov in movArray:
         if mov.get("dist") is not None and mov.get("dist") is not None and isinstance(mov.get("dist"), int) and mov.get("dist") > 0:
