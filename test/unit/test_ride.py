@@ -13,7 +13,7 @@ class RideTest(unittest.TestCase):
 
     def test_must_complete_a_ride_on_a_weekday_at_a_overnight_hour(self) -> None:
         ride = Ride()
-        ride.add_segment(10.0, datetime.fromisoformat("2021-03-10T23:00:00"))
+        ride.add_segment(10.0, datetime.fromisoformat('2021-03-10T23:00:00'))
         fare = ride.calculate_fare()
         self.assertEqual(fare, 39.0)
 
