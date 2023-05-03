@@ -21,10 +21,8 @@ def calculate_ride(segments):
                     else:
                         fare += segment.get("distance") * 2.10
             else:
-                # print(d)
                 return -2
         else:
-            # print(distance)
             return -1
     if fare < 10:
         return 10
