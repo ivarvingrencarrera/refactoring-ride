@@ -4,6 +4,7 @@ SUNDAY_OVERNIGHT_FARE = 5
 OVERNIGHT_FARE = 3.9
 SUNDAY_FARE = 2.9
 NORMAL_FARE = 2.1
+MIN_FARE = 10
 
 def is_sunday(date):
     return date.weekday() == 6
@@ -30,4 +31,4 @@ def calculate_ride(segments):
             fare += segment.get("distance") * SUNDAY_FARE
         elif is_sunday(segment.get("date")) and not is_sunday(segment.get("date")):   
             fare += segment.get("distance") * NORMAL_FARE
-    return 10 if fare < 10 else fare
+    return 10 if fare < MIN_FARE else fare
