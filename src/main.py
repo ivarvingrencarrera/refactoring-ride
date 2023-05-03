@@ -1,9 +1,9 @@
 from datetime import datetime
 
 
-def calculate_ride(movArray):
+def calculate_ride(segments):
     result = 0
-    for mov in movArray:
+    for mov in segments:
         if mov.get("dist") is not None and mov.get("dist") is not None and isinstance(mov.get("dist"), int) and mov.get("dist") > 0:
             if mov.get("ds") is not None and isinstance(mov.get("ds"), datetime) :
                 
