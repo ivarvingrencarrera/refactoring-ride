@@ -26,8 +26,4 @@ def calculate_ride(segments):
             fare += segment.get("distance") * 2.9
         elif is_sunday(segment.get("date")) and not is_sunday(segment.get("date")):   
             fare += segment.get("distance") * 2.10
-
-    if fare < 10:
-        return 10
-    else:
-        return fare
+    return 10 if fare < 10 else fare
