@@ -4,11 +4,11 @@ from src.segment import Segment
 
 
 class Ride:
-    SUNDAY_OVERNIGHT_FARE = 5
+    SUNDAY_OVERNIGHT_FARE = 5.0
     OVERNIGHT_FARE = 3.9
     SUNDAY_FARE = 2.9
     NORMAL_FARE = 2.1
-    MIN_FARE = 10
+    MIN_FARE = 10.0
 
     def __init__(self) -> None:
         self.segments: list[Segment] = []
@@ -23,8 +23,8 @@ class Ride:
                 fare += segment.distance * self.SUNDAY_OVERNIGHT_FARE
             elif segment.is_overnight() and not segment.is_sunday():
                 fare += segment.distance * self.OVERNIGHT_FARE
-            elif segment.is_sunday() and segment.is_sunday():
+            elif not segment.is_overnight() and segment.is_sunday():
                 fare += segment.distance * self.SUNDAY_FARE
-            elif segment.is_sunday() and not segment.is_sunday():
+            elif not segment.is_overnight() and not segment.is_sunday():
                 fare += segment.distance * self.NORMAL_FARE
-        return 10 if fare <= self.MIN_FARE else fare
+        return 10.0 if fare < self.MIN_FARE else fare
