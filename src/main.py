@@ -6,8 +6,8 @@ def calculate_ride(segments):
     for segment in segments:
         if segment.get("distance") is not None and segment.get("distance") is not None and isinstance(segment.get("distance"), int) and segment.get("distance") > 0:
             if segment.get("date") is not None and isinstance(segment.get("date"), datetime) :
-                # overnight
-                if segment.get("date").hour >= 22 or segment.get("date").hour <= 6:
+                overnight = segment.get("date").hour >= 22 or segment.get("date").hour <= 6
+                if overnight:
                     # not sunday
                     if segment.get("date").weekday() != 6:
                         fare += segment.get("distance") * 3.90
