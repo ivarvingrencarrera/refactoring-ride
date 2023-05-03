@@ -10,11 +10,14 @@ def is_overnight(date):
 def is_valid_distance(distance):
     return distance is not None and isinstance(distance, int) and distance > 0
 
+def is_valid_date(date):
+    return date is not None and isinstance(date, datetime) 
+
 def calculate_ride(segments):
     fare = 0
     for segment in segments:
         if is_valid_distance(segment.get("distance")):
-            if segment.get("date") is not None and isinstance(segment.get("date"), datetime) :
+            if is_valid_date(segment.get("date")):
                 if is_overnight(segment.get("date")) and is_sunday(segment.get("date")):
                     fare += segment.get("distance") * 5
                 elif is_overnight(segment.get("date")) and not is_sunday(segment.get("date")):
