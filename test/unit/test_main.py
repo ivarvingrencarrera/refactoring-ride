@@ -5,7 +5,7 @@ from datetime import datetime
 from src.main import calculate_ride
 
 
-class RideTest(unittest.TestCase):
+class MainTest(unittest.TestCase):
     def test_must_complete_a_ride_on_a_weekday_at_a_regular_hour(self):
         segments = [{
             'distance': 10, 
@@ -43,16 +43,18 @@ class RideTest(unittest.TestCase):
             'distance': -10, 
             'date': datetime.fromisoformat("2021-03-07T23:00:00")
         }]
-        fare = calculate_ride(segments)
-        self.assertEqual(fare, -1)
+        with self.assertRaises(ValueError) as context:
+            calculate_ride(segments)
+        self.assertEqual(str(context.exception), 'Invalid distance')
 
     def test_must_return_negative_if_date_is_invalid(self):
         segments = [{
             'distance': 10, 
             'date': "abc"
         }]
-        fare = calculate_ride(segments)
-        self.assertEqual(fare, -2)
+        with self.assertRaises(ValueError) as context:
+            calculate_ride(segments)
+        self.assertEqual(str(context.exception), 'Invalid date')
 
     def test_must_complete_a_ride_on_a_weekday_at_a_regular_hour(self):
         segments = [{
