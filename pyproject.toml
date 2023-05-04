@@ -12,6 +12,7 @@ python = "^3.11"
 [tool.poetry.group.test.dependencies]
 pytest = "*"
 pytest-cov = "*"
+parameterized = "*"
 
 
 [tool.poetry.group.lint.dependencies]
