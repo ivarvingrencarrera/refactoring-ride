@@ -20,5 +20,8 @@ formating:
 testing:
 	pytest --cov-report term-missing --cov-report html --cov-branch --cov src/
 
+testing_only:
+	pytest -s -x -vv
+
 install_hooks:
 	@ scripts/install_hooks.sh
