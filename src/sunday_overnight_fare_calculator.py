@@ -1,4 +1,3 @@
-
 from src.fare_calculator import FareCalculator
 from src.segment import Segment
 
