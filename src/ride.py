@@ -1,14 +1,14 @@
 from datetime import datetime
+from src.normal_fare_calculator import NormalFareCalculator
+from src.overnight_fare_calculator import OvernightFareCalculator
+from src.peak_time_fare_calculator import PeakTimeFareCalculator
 
 from src.segment import Segment
+from src.sunday_fare_calculator import SundayFareCalculator
+from src.sunday_overnight_fare_calculator import SundayOvernightFareCalculator
 
 
 class Ride:
-    PEAK_TIME_FARE = 6.0
-    SUNDAY_OVERNIGHT_FARE = 5.0
-    OVERNIGHT_FARE = 3.9
-    SUNDAY_FARE = 2.9
-    NORMAL_FARE = 2.1
     MIN_FARE = 10.0
 
     def __init__(self) -> None:
@@ -21,13 +21,18 @@ class Ride:
         fare: float = 0
         for segment in self.segments:
             if segment.is_peak_time():
-                fare += segment.distance * self.PEAK_TIME_FARE
+                fare_calculator = PeakTimeFareCalculator()
+                fare += fare_calculator.calculate(segment)
             elif segment.is_overnight() and segment.is_sunday():
-                fare += segment.distance * self.SUNDAY_OVERNIGHT_FARE
+                fare_calculator = SundayOvernightFareCalculator()
+                fare += fare_calculator.calculate(segment)
             elif segment.is_overnight() and not segment.is_sunday():
-                fare += segment.distance * self.OVERNIGHT_FARE
+                fare_calculator = OvernightFareCalculator()
+                fare += fare_calculator.calculate(segment)
             elif not segment.is_overnight() and segment.is_sunday():
-                fare += segment.distance * self.SUNDAY_FARE
+                fare_calculator = SundayFareCalculator()
+                fare += fare_calculator.calculate(segment)
             elif not segment.is_overnight() and not segment.is_sunday():
-                fare += segment.distance * self.NORMAL_FARE
+                fare_calculator = NormalFareCalculator()
+                fare += fare_calculator.calculate(segment)
         return 10.0 if fare < self.MIN_FARE else fare
