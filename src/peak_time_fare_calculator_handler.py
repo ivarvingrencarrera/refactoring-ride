@@ -11,4 +11,6 @@ class PeakTimeFareCalculatorHandler(FareCalculatorHandler):
     def calculate(self, segment: Segment) -> float:
         if segment.is_peak_time():
             return segment.distance * self.FARE
+        if not self.next_handler:
+            raise ValueError('')
         return self.next_handler.calculate(segment)
