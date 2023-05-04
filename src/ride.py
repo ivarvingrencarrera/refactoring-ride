@@ -4,6 +4,7 @@ from src.segment import Segment
 
 
 class Ride:
+    PEAK_TIME_FARE = 6.0
     SUNDAY_OVERNIGHT_FARE = 5.0
     OVERNIGHT_FARE = 3.9
     SUNDAY_FARE = 2.9
@@ -19,7 +20,9 @@ class Ride:
     def calculate_fare(self) -> float:
         fare: float = 0
         for segment in self.segments:
-            if segment.is_overnight() and segment.is_sunday():
+            if segment.is_peak_time():
+                fare += segment.distance * self.PEAK_TIME_FARE
+            elif segment.is_overnight() and segment.is_sunday():
                 fare += segment.distance * self.SUNDAY_OVERNIGHT_FARE
             elif segment.is_overnight() and not segment.is_sunday():
                 fare += segment.distance * self.OVERNIGHT_FARE
